@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+  <start>
+    <ref name="element-protea"/>
+  </start>
+  <define name="element-protea">
+    <element name="protea">
+      <oneOrMore>
+        <ref name="element-tree"/>
+      </oneOrMore>
+    </element>
+  </define>
+  <define name="element-tree">
+    <element name="tree">
+      <interleave>
+        <attribute name="population"/>
+        <attribute name="id">
+          <data type="integer"/>
+        </attribute>
+        <oneOrMore>
+          <ref name="element-internode"/>
+        </oneOrMore>
+        <zeroOrMore>
+          <ref name="element-branch"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="element-bud"/>
+        </optional>
+        <optional>
+          <ref name="element-inflorescence"/>
+        </optional>
+      </interleave>
+    </element>
+  </define>
+  <define name="element-internode">
+    <element name="internode">
+      <attribute name="length">
+        <data type="decimal"/>
+      </attribute>
+      <attribute name="bottom">
+        <data type="decimal"/>
+      </attribute>
+      <attribute name="top">
+        <data type="decimal"/>
+      </attribute>
+    </element>
+  </define>
+  <define name="element-branch">
+    <element name="branch">
+      <interleave>
+        <attribute name="level">
+          <data type="integer"/>
+        </attribute>
+        <zeroOrMore>
+          <ref name="element-internode"/>
+        </zeroOrMore>
+        <zeroOrMore>
+          <ref name="element-branch"/>
+        </zeroOrMore>
+        <optional>
+          <ref name="element-bud"/>
+        </optional>
+        <optional>
+          <ref name="element-inflorescence"/>
+        </optional>
+      </interleave>
+    </element>
+  </define>
+  <define name="element-bud">
+    <element name="bud">
+      <attribute name="type">
+        <choice>
+          <value>alive</value>
+          <value>aborted</value>
+          <value>dead</value>
+        </choice>
+      </attribute>
+    </element>
+  </define>
+  <define name="element-inflorescence">
+    <element name="inflorescence">
+      <text/>
+    </element>
+  </define>
+</grammar>

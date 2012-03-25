@@ -1,0 +1,36 @@
+start = element-protea
+ 
+element-protea = element protea {
+	element-tree+
+	}
+ 
+element-tree = element tree {
+	attribute population { text }&
+	attribute id { xsd:integer }&
+	element-internode+&
+	element-branch*&
+	element-bud?&
+	element-inflorescence?
+	}
+
+element-internode = element internode {
+	attribute length { xsd:decimal },
+	attribute bottom { xsd:decimal },
+	attribute top { xsd:decimal }
+	}
+
+element-branch = element branch {
+	attribute level { xsd:integer }&
+	element-internode*&
+	element-branch*&
+	element-bud?&
+	element-inflorescence?
+	}
+
+element-bud = element bud {
+	attribute type { "alive" | "aborted" | "dead" }
+	}
+
+element-inflorescence = element inflorescence {
+	text
+	}
